@@ -5,13 +5,22 @@ import {
   ScrollView,
   StyleSheet,
   Text,
+  TouchableOpacity,
   View,
 } from "react-native";
 import { Button } from "./src/components/Button";
 import { styles } from "./App.styles";
 import { currencies } from "./src/constants/currencies";
+import { Input } from "./src/components/Input";
+import { ResultCard } from "./src/components/ResultCard";
+import { exchangeRateApi } from "./src/services/api";
 
 export default function App() {
+  async function fetchExchangeRate() {
+    const data = await exchangeRateApi("BRL");
+    console.log(data)
+  }
+
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -30,17 +39,39 @@ export default function App() {
 
           <View style={styles.card}>
             <Text style={styles.label}>De: </Text>
-            <View>
-              {currencies.map(currency => (
-                <Button variant="primary" 
-                key={currency.code}
-                currency={currency}
+            <View style={styles.currencyGrid}>
+              {currencies.map((currency) => (
+                <Button
+                  variant="primary"
+                  key={currency.code}
+                  currency={currency}
                 />
-                
               ))}
+            </View>
+            <Input label={"Valor:"} />
+            <TouchableOpacity style={styles.swapButton}>
+              <Text style={styles.swapButtonText}>↑↓</Text>
+            </TouchableOpacity>
 
+            <Text style={styles.label}>Para: </Text>
+            <View style={styles.currencyGrid}>
+              {currencies.map((currency) => (
+                <Button
+                  key={currency.code}
+                  currency={currency}
+                  variant="secondary"
+                />
+              ))}
             </View>
           </View>
+          <TouchableOpacity
+            style={styles.convertButton}
+            onPress={fetchExchangeRate}
+          >
+            <Text style={styles.swapButtonText}>Converter</Text>
+          </TouchableOpacity>
+
+          <ResultCard />
         </View>
       </ScrollView>
     </KeyboardAvoidingView>

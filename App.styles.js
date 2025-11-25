@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
         paddingBottom: 24
     },
     header:{
-        marginBottom: 32
+        marginBottom: 32,
+        alignItems: 'center'
     },
     title:{
         fontSize: 32,
@@ -39,5 +40,36 @@ export const styles = StyleSheet.create({
         color: colors.textSecondary,
         marginBottom: 8,
         fontSize: 14
+    },
+    currencyGrid:{
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginHorizontal: -4,
+        marginBottom: 12
+    },
+    swapButton:{
+        backgroundColor: colors.inputBackground,
+        paddingVertical: 16,
+        paddingHorizontal: 24,
+        borderRadius: 12,
+        marginBottom: 24
+    },
+    swapButtonText:{
+        color: colors.text,
+        textAlign: 'center',
+        fontSize: 18,
+        fontWeight: 'bold'
+    },
+    convertButton:{
+        backgroundColor: colors.primary,
+        paddingVertical: 16,
+        paddingHorizontal: 24,
+        borderRadius: 12,
+        marginBottom: 24
+    },
+    convertButtonDisabled:{
+        backgroundColor: colors.disabled
     }
 })
